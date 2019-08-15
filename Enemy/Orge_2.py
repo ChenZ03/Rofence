@@ -12,4 +12,4 @@ class Orge2(Enemy):
         for x in range(7):
             string = str(x)
             self.imgs.append(pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets/ORG/2_ORK/RUN", "RUN_00" + string + ".png")), (64, 64)))
+                pygame.image.load(os.path.join("Assets/ORG/2_ORK/WALK", "WALK_00" + string + ".png")), (50, 50)))

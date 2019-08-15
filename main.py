@@ -13,7 +13,7 @@ class Game:
         self.width = 1200
         self.window = pygame.display.set_mode((self.width, self.height))
         self.towers = []
-        self.enemies = [Orge(), Orge2(), Orge3()]
+        self.enemies = [Orge3()]
         self.lives = 20
         self.money = 200
         self.bg = pygame.image.load(os.path.join("Assets", "bg.png"))
@@ -25,7 +25,7 @@ class Game:
         clock = pygame.time.Clock()
 
         while run:
-            clock.tick(30)
+            clock.tick(60)
             for event in pygame.event.get():
                 if event.type == QUIT:
                     run = False
@@ -38,12 +38,19 @@ class Game:
             # Loop Through Enemies:
             delete = []
             for Enemy in self.enemies:
-                if Enemy.x < -5:
+                if Enemy.x > 1200:
                     delete.append(Enemy)
 
             # Delete off_Screen Enemies
             for delete in delete:
                 self.enemies.remove(delete)
+
+            # Drawing Circles (path)
+            '''pos = pygame.mouse.get_pos()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.clicks.append(pos)
+                print(self.clicks)'''
 
             self.draw()
 
@@ -54,6 +61,8 @@ class Game:
         # Draw Enemy
         for enemies in self.enemies:
             enemies.draw(self.window)
+        '''for p in self.clicks:
+            pygame.draw.circle(self.window, (255, 0, 0), (p[0], p[1]), 5, 0)'''
         pygame.display.update()
 
 
