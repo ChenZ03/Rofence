@@ -4,6 +4,7 @@ import os
 from Enemy.Orge import Orge
 from Enemy.Orge_2 import Orge2
 from Enemy.Orge_3 import Orge3
+from Towers.LongTower import LongTower
 import time
 import random
 
@@ -13,7 +14,7 @@ class Game:
         self.height = 700
         self.width = 1200
         self.window = pygame.display.set_mode((self.width, self.height))
-        self.towers = []
+        self.towers = [LongTower(300, 200), LongTower(510, 500)]
         self.enemies = [Orge()]
         self.lives = 20
         self.money = 200
@@ -27,10 +28,10 @@ class Game:
         clock = pygame.time.Clock()
 
         while run:
-            if time.time() - self.timer >= 2:
+            if time.time() - self.timer > 5:
                 self.timer = time.time()
-                # self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
-            clock.tick(60)
+                self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
+            clock.tick(55)
             for event in pygame.event.get():
                 if event.type == QUIT:
                     run = False
@@ -50,6 +51,10 @@ class Game:
             for delete in delete:
                 self.enemies.remove(delete)
 
+            # Loop through Towers
+            for towers in self.towers:
+                towers.attack(self.enemies)
+
             # Drawing Circles (path)
             '''pos = pygame.mouse.get_pos()
 
@@ -66,8 +71,15 @@ class Game:
         # Draw Enemy
         for enemies in self.enemies:
             enemies.draw(self.window)
+
+        # Draw Clicks
         '''for p in self.clicks:
             pygame.draw.circle(self.window, (255, 0, 0), (p[0], p[1]), 5, 0)'''
+
+        # Draw Towers
+        for tower in self.towers:
+            tower.draw(self.window)
+
         pygame.display.update()
 
 
