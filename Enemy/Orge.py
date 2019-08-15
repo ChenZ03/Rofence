@@ -17,4 +17,4 @@ class Orge(Enemy):
         super().__init__()
         self.maxHP = 6
         self.health = self.maxHP
-        self.imgs = imgs
+        self.imgs = imgs[:]
