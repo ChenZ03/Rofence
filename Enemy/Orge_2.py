@@ -8,6 +8,8 @@ class Orge2(Enemy):
     def __init__(self):
         super().__init__()
         self.imgs = []
+        self.maxHP = 5
+        self.health = self.maxHP
 
         for x in range(7):
             string = str(x)

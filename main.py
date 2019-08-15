@@ -4,7 +4,8 @@ import os
 from Enemy.Orge import Orge
 from Enemy.Orge_2 import Orge2
 from Enemy.Orge_3 import Orge3
-
+import time
+import random
 
 class Game:
     def __init__(self):
@@ -13,18 +14,22 @@ class Game:
         self.width = 1200
         self.window = pygame.display.set_mode((self.width, self.height))
         self.towers = []
-        self.enemies = [Orge3()]
+        self.enemies = [Orge()]
         self.lives = 20
         self.money = 200
         self.bg = pygame.image.load(os.path.join("Assets", "bg.png"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
         self.clicks = []
+        self.timer = time.time()
 
     def run(self):
         run = True
         clock = pygame.time.Clock()
 
         while run:
+            if time.time() - self.timer >= 2:
+                self.timer = time.time()
+                # self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
             clock.tick(60)
             for event in pygame.event.get():
                 if event.type == QUIT:
