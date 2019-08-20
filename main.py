@@ -7,11 +7,14 @@ from Enemy.Orge_3 import Orge3
 from Towers.canonTower import LongTower, ShortTower
 import time
 import random
+from Shop.Shop import Shop
 pygame.font.init()
 pygame.init()
 
 lives_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "lives.png")), (25, 25))
 coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (25, 25))
+Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Rec.png")), (1000, 200))
+Shop_icon = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Blank.png")), (75, 75))
 
 
 class Game:
@@ -20,7 +23,7 @@ class Game:
         self.height = 700
         self.width = 1200
         self.window = pygame.display.set_mode((self.width, self.height))
-        self.towers = [ShortTower(320, 200), LongTower(510, 500)]
+        self.towers = [LongTower(320, 200), LongTower(510, 500)]
         self.enemies = [Orge()]
         self.life = 10
         self.money = 100
@@ -29,16 +32,21 @@ class Game:
         self.clicks = []
         self.timer = time.time()
         self.life_font = pygame.font.SysFont("comicsans", 65)
+        self.shop_font = pygame.font.SysFont("Times New Roman", 40)
+        self.shop = Shop(300, 0, Shop_img)
+        self.shop.add_btn(Shop_icon, "ShortTower", 100)
+        self.shop.add_btn(Shop_icon, "LongTower", 300)
 
     def run(self):
         run = True
         clock = pygame.time.Clock()
 
         while run:
+            clock.tick(200)
             if time.time() - self.timer > 5:
                 self.timer = time.time()
                 self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
-            clock.tick(200)
+
             for event in pygame.event.get():
                 if event.type == QUIT:
                     run = False
@@ -109,6 +117,15 @@ class Game:
 
         self.window.blit(text, (start_x - text.get_width() - 10, 75))
         self.window.blit(money, (start_x, 65))
+
+        # Draw Shop
+        self.shop.draw(self.window)
+        start_x = self.width - (self.width - 365)
+        end_x = self.width - 440
+        cost1 = self.shop_font.render(str(100), 1, (0, 0, 0))
+        cost2 = self.shop_font.render(str(300), 1, (0, 0, 0))
+        self.window.blit(cost1, (start_x, 660))
+        self.window.blit(cost2, (end_x, 660))
 
         pygame.display.update()
 
