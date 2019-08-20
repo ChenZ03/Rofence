@@ -36,25 +36,46 @@ class Game:
         self.shop = Shop(300, 0, Shop_img)
         self.shop.add_btn(Shop_icon, "ShortTower", 100)
         self.shop.add_btn(Shop_icon, "LongTower", 300)
+        self.movingTowers = None
 
     def run(self):
         run = True
         clock = pygame.time.Clock()
-
+        clock.tick(100)
         while run:
-            clock.tick(200)
-            if time.time() - self.timer > 5:
+
+            # GENERATE SPAWNS
+            if time.time() - self.timer > 2:
                 self.timer = time.time()
                 self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
 
+            pos = pygame.mouse.get_pos()
+
+            # If tower is moving
+            if self.movingTowers:
+                self.movingTowers.move(pos[0], pos[1])
+
+            # Game Event Starts
             for event in pygame.event.get():
                 if event.type == QUIT:
                     run = False
 
                 pos = pygame.mouse.get_pos()
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    pass
+                '''if event.type == pygame.MOUSEBUTTONDOWN:
+                    # If you are buying towers
+                    if self.movingTowers:
+
+                        if self.movingTowers.name in towers_name:
+                            self.towers.append(self.movingTowers)
+
+                        self.movingTowers = None
+
+                    else:
+                        # Buying Towers From The Shop
+                        Shop_btn = self.shop.get_clicked(pos[0], pos[1])
+                        if Shop_btn:
+                            self.buy_towers(Shop_btn)'''
 
             # Loop Through Enemies:
             delete = []
@@ -67,9 +88,9 @@ class Game:
                 self.life -= 1
                 self.enemies.remove(delete)
 
-            # Loop through Towers
+            # Adding Money
             for towers in self.towers:
-                towers.attack(self.enemies)
+                self.money += towers.attack(self.enemies)
 
             # Game Over
             if self.life <= 0:
@@ -77,9 +98,8 @@ class Game:
                 run = False
 
             # Drawing Circles (path)
-            '''pos = pygame.mouse.get_pos()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            '''if event.type == pygame.MOUSEBUTTONDOWN:
                 self.clicks.append(pos)
                 print(self.clicks)'''
 
@@ -101,6 +121,10 @@ class Game:
         # Draw Towers
         for tower in self.towers:
             tower.draw(self.window)
+
+        # Draw Buying_towers
+        if self.movingTowers:
+            self.movingTowers.draw(self.window)
 
         # Draw Lives
         text = self.life_font.render(str(self.life), 1, (255, 255, 255))
@@ -128,6 +152,19 @@ class Game:
         self.window.blit(cost2, (end_x, 660))
 
         pygame.display.update()
+
+    def buy_towers(self, tower):
+        x, y = pygame.mouse.get_pos()
+        towerName = ["ShortTower", "LongTower"]
+        towerSelf = [ShortTower(x, y), LongTower(x, y)]
+
+        try:
+            buy = towerSelf[towerName.index(tower)]
+            self.movingTowers = buy
+            buy.moving = True
+
+        except Exception as E:
+            print(E)
 
 
 game = Game()
