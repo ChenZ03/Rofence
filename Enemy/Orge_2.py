@@ -14,7 +14,7 @@ class Orge2(Enemy):
 
     def __init__(self):
         super().__init__()
-        self.maxHP = 6
-        self.money = 12
+        self.maxHP = 2
         self.health = self.maxHP
+        self.money = 30
         self.imgs = imgs[:]

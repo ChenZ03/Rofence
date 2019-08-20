@@ -1,8 +1,10 @@
 import pygame
 from pygame import *
+from Shop.Shop import Menu
 import sys
 import os
 
+bg = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Rec.png")), (120, 70))
 
 class Tower:
     def __init__(self, x, y):
@@ -14,7 +16,7 @@ class Tower:
         self.price = [0, 0, 0]
         self.level = 1
         self.selected = False
-        self.menu = None
+        self.menu = Menu(self, self.x, self.y, bg, [2000, "MAX"])
         self.tower_imgs = []
         self.damage = 1
 

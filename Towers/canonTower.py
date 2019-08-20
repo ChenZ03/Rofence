@@ -15,6 +15,8 @@ class LongTower(Tower):
         self.inRange = False
         self.hitTimer = time.time()
         self.damage = 2
+        self.moving = False
+        self.name = "LongTower"
 
         # Load imgs for Long tower:
         self.tower_imgs.append(pygame.transform.scale(pygame.image.load(os.path.join("Assets/Stone_tower/LongRange", "LongRange.png")), (150, 150)))
@@ -45,6 +47,7 @@ class LongTower(Tower):
         self.range = ran
 
     def attack(self, enemies):
+        money = 0
 
         self.inRange = False
         closest_enemy = []
@@ -62,7 +65,10 @@ class LongTower(Tower):
             if time.time() - self.hitTimer >= 2:
                 self.hitTimer = time.time()
                 if first_enemy.hit(self.damage) == True:
+                    money = first_enemy.money
                     enemies.remove(first_enemy)
+
+        return money
 
 
 class ShortTower(Tower):
@@ -75,6 +81,8 @@ class ShortTower(Tower):
         self.inRange = False
         self.hitTimer = time.time()
         self.damage = 1
+        self.moving = False
+        self.name = "ShortTower"
 
         # Load imgs for Long tower:
         self.tower_imgs.append(pygame.transform.scale(pygame.image.load(os.path.join("Assets/Stone_tower/ShortRange", "ShortTower.png")), (150, 150)))
@@ -85,7 +93,7 @@ class ShortTower(Tower):
     def draw(self, window):
         super().draw(window)
 
-        if self.inRange:
+        if self.inRange and not self.moving:
             self.bullet_count += 1
             if self.bullet_count >= len(self.bullet_imgs) * 5:
                 self.bullet_count = 0
@@ -105,6 +113,7 @@ class ShortTower(Tower):
         self.range = ran
 
     def attack(self, enemies):
+        money = 0
 
         self.inRange = False
         closest_enemy = []
@@ -112,15 +121,17 @@ class ShortTower(Tower):
             x = enemy.x
             y = enemy.y
 
-            distance = math.sqrt((self.x - x)**2 + (self.y - y) ** 2)
+            distance = math.sqrt((self.x - x) ** 2 + (self.y - y) ** 2)
             if distance < self.range:
                 self.inRange = True
                 closest_enemy.append(enemy)
 
-        if len(closest_enemy) > 0 :
+        if len(closest_enemy) > 0:
             first_enemy = closest_enemy[0]
-            if time.time() - self.hitTimer >= 0.5:
+            if time.time() - self.hitTimer >= 2:
                 self.hitTimer = time.time()
                 if first_enemy.hit(self.damage) == True:
+                    money = first_enemy.money
                     enemies.remove(first_enemy)
 
+        return money

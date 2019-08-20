@@ -131,7 +131,8 @@ class Shop:
         self.buttons.append(Button(btnX, btnY, image, name, cost))
 
     def item_cost(self):
-        return None
+        pass
+
 
     def draw(self, window):
         window.blit(self.image, (100, 600))
@@ -151,4 +152,3 @@ class Shop:
     def update(self):
         for btn in self.buttons:
             btn.update()
-

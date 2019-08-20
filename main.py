@@ -7,7 +7,7 @@ from Enemy.Orge_3 import Orge3
 from Towers.canonTower import LongTower, ShortTower
 import time
 import random
-from Shop.Shop import Shop
+from Shop.Shop import Shop, Button
 pygame.font.init()
 pygame.init()
 
@@ -16,6 +16,8 @@ coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin
 Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Rec.png")), (1000, 200))
 Shop_icon = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Blank.png")), (75, 75))
 
+towers_name = ["LongTower", "ShortTower"]
+
 
 class Game:
     def __init__(self):
@@ -23,7 +25,7 @@ class Game:
         self.height = 700
         self.width = 1200
         self.window = pygame.display.set_mode((self.width, self.height))
-        self.towers = [LongTower(320, 200), LongTower(510, 500)]
+        self.towers = [ShortTower(320, 200)]
         self.enemies = [Orge()]
         self.life = 10
         self.money = 100
@@ -41,11 +43,11 @@ class Game:
     def run(self):
         run = True
         clock = pygame.time.Clock()
-        clock.tick(100)
+        clock.tick(200)
         while run:
 
             # GENERATE SPAWNS
-            if time.time() - self.timer > 2:
+            if time.time() - self.timer > 4:
                 self.timer = time.time()
                 self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
 
@@ -62,7 +64,7 @@ class Game:
 
                 pos = pygame.mouse.get_pos()
 
-                '''if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.type == pygame.MOUSEBUTTONDOWN:
                     # If you are buying towers
                     if self.movingTowers:
 
@@ -75,7 +77,13 @@ class Game:
                         # Buying Towers From The Shop
                         Shop_btn = self.shop.get_clicked(pos[0], pos[1])
                         if Shop_btn:
-                            self.buy_towers(Shop_btn)'''
+                            if Shop_btn == "ShortTower":
+                                cost = 100
+                            else:
+                                cost = 300
+                            if self.money >= cost:
+                                self.money -= cost
+                                self.buy_towers(Shop_btn)
 
             # Loop Through Enemies:
             delete = []
@@ -98,6 +106,7 @@ class Game:
                 run = False
 
             # Drawing Circles (path)
+
 
             '''if event.type == pygame.MOUSEBUTTONDOWN:
                 self.clicks.append(pos)
@@ -167,6 +176,7 @@ class Game:
             print(E)
 
 
+pygame.display.set_caption("ROFENCE")
 game = Game()
 game.run()
 
