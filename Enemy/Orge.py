@@ -8,7 +8,7 @@ Orge_images = []
 
 
 # add image for Orge
-for x in range(7):
+for x in range(4):
     string = str(x)
     Orge_images.append(pygame.transform.scale(
         pygame.image.load(os.path.join("Assets/ORG/1_ORK/WALK", "WALK_00" + string + ".png")), (50, 50)))
