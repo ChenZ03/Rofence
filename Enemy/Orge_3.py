@@ -22,5 +22,5 @@ class Orge3(Enemy):
         super().__init__()
         self.maxHP = 5
         self.health = self.maxHP
-        self.money = 12
+        self.money = 16
         self.imgs = images[:]

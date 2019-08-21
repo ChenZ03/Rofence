@@ -19,15 +19,15 @@ class Menu:
         self.item_cost = item_cost
         self.buttons = []
         self.items = 0
-        self.bg = images
+        self.background = images
         self.font = pygame.font.SysFont("comicsans", 25)
         self.tower = tower
 
     # add button for 'shop'
-    def add_btn(self, img, name):
+    def add_btn(self, image, name):
 
         self.items += 1
-        self.buttons.append(Button(self, img, name))
+        self.buttons.append(Button(self, image, name))
 
     # cost for tower
     def get_item_cost(self):
@@ -37,12 +37,10 @@ class Menu:
     # to render the window for 'Menu'
     def draw(self, win):
 
-        win.blit(self.bg, (self.x - self.bg.get_width() / 2, self.y - 120))
+        win.blit(self.background, (self.x - self.background.get_width() / 2, self.y - 120))
         for item in self.buttons:
             item.draw(win)
-            win.blit(star, (item.x + item.width + 5, item.y - 9))
-            text = self.font.render(str(self.item_cost[self.tower.level - 1]), 1, (255, 255, 255))
-            win.blit(text, (item.x + item.width + 30 - text.get_width() / 2, item.y + star.get_height() - 8))
+            win.blit(coin, (item.x + item.width + 5, item.y - 9))
 
     # return the name of button if the button is clicked
     def get_clicked(self, X, Y):

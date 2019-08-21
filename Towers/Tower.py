@@ -1,10 +1,12 @@
+# Imports and inheritances
 import pygame
 from pygame import *
 from Shop.Shop import Menu
-import sys
 import os
 
+# Shop's background
 bg = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Rec.png")), (120, 70))
+
 
 class Tower:
     def __init__(self, x, y):
@@ -30,9 +32,6 @@ class Tower:
         if  X <= self.x + self.width and X >= self.x:
             if Y <= self.y and Y >= self.y:
                 return False
-
-    def sell(self):
-        return self.sell_price[self.level - 1]
 
     def move(self, x, y):
         self.x = x

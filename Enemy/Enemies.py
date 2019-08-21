@@ -1,3 +1,4 @@
+# Imports
 import pygame
 from pygame import *
 import math
@@ -9,7 +10,9 @@ class Enemy:
         self.width = 32
         self.height = 32
         self.img = None
+        # Path for enemies to walk on
         self.path = [(-10, 386), (27, 386), (192, 378), (201, 176), (438, 173), (438, 450), (740, 446), (762, 316), (1186, 313), (1300, 313)]
+
         self.x = self.path[0][0]
         self.y = self.path[0][1]
         self.animation_count = 0
@@ -19,9 +22,9 @@ class Enemy:
         self.move_distance = 0
         self.distance = 0
         self.imgs = []
-        self.flipped = False
         self.maxHP = 0
 
+    # Draw enemies animations
     def draw(self, window):
         # window = surface
         self.img = self.imgs[self.animation_count]
@@ -32,6 +35,7 @@ class Enemy:
         self.hpBar(window)
         self.move()
 
+    # Enemy Health Bar
     def hpBar(self, window):
         hpLen = 50
         hpMove = round(hpLen) / self.maxHP
@@ -45,6 +49,7 @@ class Enemy:
             if Y <= self.y and Y >= self.y:
                 return False
 
+    # Enemy move towards the path from one to another
     def move(self):
         self.animation_count += 1
         if self.animation_count >= len(self.imgs):
@@ -86,6 +91,7 @@ class Enemy:
                 if self.x <= x2 and self.y >= y2:
                     self.path_pos += 1"""
 
+    # Check enemy is dead or na
     def hit(self, damage):
         # True if enemy is destroyed
         self.health -= damage

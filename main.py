@@ -48,8 +48,8 @@ class Game:
         self.money = 100
 
         # Initialize Background image
-        self.bg = pygame.image.load(os.path.join("Assets", "bg.png"))
-        self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
+        self.background = pygame.image.load(os.path.join("Assets", "bg.png"))
+        self.background = pygame.transform.scale(self.background, (self.width, self.height))
 
         # Mouse clicks list
         self.clicks = []
@@ -162,7 +162,7 @@ class Game:
         pygame.quit()
 
     def draw(self):
-        self.window.blit(self.bg, (0, 0))
+        self.window.blit(self.background, (0, 0))
 
         # Draw Clicks
         '''for p in self.clicks:

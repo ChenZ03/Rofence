@@ -14,7 +14,9 @@ for i in range(1, 6):
     Bullet_images.append(pygame.transform.scale(pygame.image.load(os.path.join("Assets/Stone_tower/ShortRange","explosion_00" + str(i) + ".png")), (20, 20)))
 
 
+# Short Tower Class (inherit from Tower Class)
 class ShortTower(Tower):
+    # Initialise ShortTower's Vars
     def __init__(self, x, y):
         super().__init__(x, y)
         self.tower_imgs = ShortTower_images[:]
@@ -27,6 +29,7 @@ class ShortTower(Tower):
         self.moving = False
         self.name = "ShortTower"
 
+    # Draw tower
     def draw(self, window):
         super().draw(window)
 
@@ -47,9 +50,11 @@ class ShortTower(Tower):
 
         window.blit(surface, (self.x - self.range, self.y - self.range))
 
+    # Tower Range
     def range(self, ran):
         self.range = ran
 
+    # Attack closet enemy and add money
     def attack(self, enemies):
         money = 0
 

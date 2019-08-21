@@ -1,4 +1,4 @@
-#imports
+# imports
 import pygame
 import os
 from .Enemies import Enemy
@@ -22,5 +22,5 @@ class Orge2(Enemy):
         super().__init__()
         self.maxHP = 3
         self.health = self.maxHP
-        self.money = 5
+        self.money = 8
         self.imgs = Images[:]
