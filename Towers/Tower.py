@@ -26,12 +26,6 @@ class Tower:
         img = self.tower_imgs[self.level - 1]
         window.blit(img, (self.x - img.get_width() // 2, self.y - img.get_height() // 2))
 
-    def draw_radius(self, window):
-        pass
-
-    def draw_placement(self, window):
-        pass
-
     def click(self, X, Y):
         if  X <= self.x + self.width and X >= self.x:
             if Y <= self.y and Y >= self.y:
@@ -39,14 +33,6 @@ class Tower:
 
     def sell(self):
         return self.sell_price[self.level - 1]
-
-    def upgrade(self):
-        if self.level < len(self.tower_imgs):
-            self.level += 1
-            self.damage += 1
-
-    def upgrade_cost(self):
-        return self.price[self.level - 1]
 
     def move(self, x, y):
         self.x = x

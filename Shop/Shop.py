@@ -1,47 +1,42 @@
+# Imports
 import pygame
 import os
 pygame.font.init()
 
+
+# Load Coin image
 coin = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (45, 45))
 coint = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (75, 75))
 
 
+# create a class and inherit
 class Menu:
-    def __init__(self, tower, x, y, img, item_cost):
+    def __init__(self, tower, x, y, images, item_cost):
         self.x = x
         self.y = y
-        self.width = img.get_width()
-        self.height = img.get_height()
+        self.width = images.get_width()
+        self.height = images.get_height()
         self.item_cost = item_cost
         self.buttons = []
         self.items = 0
-        self.bg = img
+        self.bg = images
         self.font = pygame.font.SysFont("comicsans", 25)
         self.tower = tower
 
+    # add button for 'shop'
     def add_btn(self, img, name):
-        """
-        adds buttons to menu
-        :param img: surface
-        :param name: str
-        :return: None
-        """
+
         self.items += 1
         self.buttons.append(Button(self, img, name))
 
+    # cost for tower
     def get_item_cost(self):
-        """
-        gets cost of upgrade to next level
-        :return: int
-        """
+
         return self.item_cost[self.tower.level - 1]
 
+    # to render the window for 'Menu'
     def draw(self, win):
-        """
-        draws btns and menu bg
-        :param win: surface
-        :return: None
-        """
+
         win.blit(self.bg, (self.x - self.bg.get_width() / 2, self.y - 120))
         for item in self.buttons:
             item.draw(win)
@@ -49,68 +44,56 @@ class Menu:
             text = self.font.render(str(self.item_cost[self.tower.level - 1]), 1, (255, 255, 255))
             win.blit(text, (item.x + item.width + 30 - text.get_width() / 2, item.y + star.get_height() - 8))
 
+    # return the name of button if the button is clicked
     def get_clicked(self, X, Y):
-        """
-        return the clicked item from the menu
-        :param X: int
-        :param Y: int
-        :return: str
-        """
+
         for btn in self.buttons:
             if btn.click(X, Y):
                 return btn.name
 
         return None
 
+    # update button
     def update(self):
-        """
-        update menu and button location
-        :return: None
-        """
+
         for btn in self.buttons:
             btn.update()
 
 
+# create a class for the buttons and initialize the properties of button
 class Button:
     def __init__(self, x, y, img, name, cost):
         self.name = name
-        self.img = img
+        self.images = img
         self.x = x
         self.y = y
-        self.width = self.img.get_width()
-        self.height = self.img.get_height()
+        self.width = self.images.get_width()
+        self.height = self.images.get_height()
         self.item_cost = cost
 
+    # returns True if the button collided
     def click(self, X, Y):
-        """
-        returns if the positon has collided with the menu
-        :param X: int
-        :param Y: int
-        :return: bool
-        """
+
         if X <= self.x + self.width and X >= self.x:
             if Y <= self.y + self.height and Y >= self.y:
                 return True
         return False
 
+    # to render the image of button
     def draw(self, win):
-        """
-        draws the button image
-        :param win: surface
-        :return: None
-        """
-        win.blit(self.img, (self.x, self.y))
 
+        win.blit(self.images, (self.x, self.y))
+
+    # to update
     def update(self):
-        """
-        updates button position
-        :return: None
-        """
+
         self.x = self.menu.x - 50
         self.y = self.menu.y - 110
 
 
+# create a class for shop and initialize the properties of shop
 class Shop:
+
     def __init__(self, x, y, image):
         self.tower = None
         self.buttons = []
@@ -123,17 +106,19 @@ class Shop:
         self.cost = 0
         self.font = pygame.font.SysFont("Times New Roman", 25)
 
+    # add button for shop
     def add_btn(self, image, name, cost):
         self.cost = cost
         self.item += 1
-        btnX = self.x - 20 + (self.item - 1) * 400
-        btnY = self.y + 620
-        self.buttons.append(Button(btnX, btnY, image, name, cost))
+        button_X = self.x - 20 + (self.item - 1) * 400
+        button_Y = self.y + 620
+        self.buttons.append(Button(button_X, button_Y, image, name, cost))
 
+    #
     def item_cost(self):
         pass
 
-
+    # to render window for 'shop'
     def draw(self, window):
         window.blit(self.image, (100, 600))
         for item in self.buttons:
@@ -142,6 +127,7 @@ class Shop:
             cost = self.font.render(self.item_cost(), 1, (255, 255, 255))
             window.blit(cost, (item.x + item.width + 30 - cost.get_width() / 2, item.y + coin.get_height() - 8))
 
+    # returns the name of button when the button is clicked
     def get_clicked(self, X, Y):
         for btn in self.buttons:
             if btn.click(X, Y):
@@ -149,6 +135,7 @@ class Shop:
 
         return None
 
+    # to update button
     def update(self):
         for btn in self.buttons:
             btn.update()

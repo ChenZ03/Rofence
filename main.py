@@ -1,56 +1,91 @@
+# IMPORTS
 import pygame
 from pygame import *
 import os
+import time
+import random
+
+# Import enemy from other files (Easier for lookup and editing)
 from Enemy.Orge import Orge
 from Enemy.Orge_2 import Orge2
 from Enemy.Orge_3 import Orge3
-from Towers.canonTower import LongTower, ShortTower
-import time
-import random
-from Shop.Shop import Shop, Button
-pygame.font.init()
-pygame.init()
 
+# Import Tower from other files
+from Towers.LongTower import LongTower
+from Towers.ShortTower import ShortTower
+
+# Import Shop from other files
+from Shop.Shop import Shop, Button
+
+# Load Images and Scale them
 lives_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "lives.png")), (25, 25))
 coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (25, 25))
 Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Rec.png")), (1000, 200))
 Shop_icon = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Blank.png")), (75, 75))
 
+# Name List of Towers
 towers_name = ["LongTower", "ShortTower"]
 
 
+# Main game class
 class Game:
+    # Initialize Game Variables
     def __init__(self):
         pygame.init()
+        # Height of the Window
         self.height = 700
         self.width = 1200
         self.window = pygame.display.set_mode((self.width, self.height))
-        self.towers = [ShortTower(320, 200)]
+
+        # List of Towers
+        self.towers = [ShortTower(280, 320)]
+
+        # list of enemies ----- Orge() as the first enemy
         self.enemies = [Orge()]
-        self.life = 10
+
+        # Lives and Money
+        self.lives = 10
         self.money = 100
+
+        # Initialize Background image
         self.bg = pygame.image.load(os.path.join("Assets", "bg.png"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
+
+        # Mouse clicks list
         self.clicks = []
+
+        # Game Timer
         self.timer = time.time()
+
+        # Select Tower to view Range
+        self.selectedTowers = None
+
+        # Main Font
         self.life_font = pygame.font.SysFont("comicsans", 65)
+
+        # Shop's settings
         self.shop_font = pygame.font.SysFont("Times New Roman", 40)
         self.shop = Shop(300, 0, Shop_img)
         self.shop.add_btn(Shop_icon, "ShortTower", 100)
         self.shop.add_btn(Shop_icon, "LongTower", 300)
+
+        # For placing new Towers
         self.movingTowers = None
 
+    # MAIN RUN
     def run(self):
         run = True
+        # Frame
         clock = pygame.time.Clock()
         clock.tick(200)
         while run:
 
             # GENERATE SPAWNS
-            if time.time() - self.timer > 4:
+            if time.time() - self.timer > 5:
                 self.timer = time.time()
                 self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
 
+            # Get mouse pos
             pos = pygame.mouse.get_pos()
 
             # If tower is moving
@@ -58,10 +93,13 @@ class Game:
                 self.movingTowers.move(pos[0], pos[1])
 
             # Game Event Starts
+
+            # Quit GAME EVENT
             for event in pygame.event.get():
                 if event.type == QUIT:
                     run = False
 
+                # Mouse position
                 pos = pygame.mouse.get_pos()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -76,6 +114,8 @@ class Game:
                     else:
                         # Buying Towers From The Shop
                         Shop_btn = self.shop.get_clicked(pos[0], pos[1])
+
+                        # Determine cost and subtract them from self.money
                         if Shop_btn:
                             if Shop_btn == "ShortTower":
                                 cost = 100
@@ -85,15 +125,22 @@ class Game:
                                 self.money -= cost
                                 self.buy_towers(Shop_btn)
 
+                    for tw in self.towers:
+                        if tw.click(pos[0], pos[1]):
+                            tw.selected = True
+                            self.selectedTowers = tw
+                        else:
+                            tw.selected = False
+
             # Loop Through Enemies:
             delete = []
             for Enemy in self.enemies:
                 if Enemy.x > 1200:
                     delete.append(Enemy)
 
-            # Delete off_Screen Enemies
+            # Delete end path Enemies
             for delete in delete:
-                self.life -= 1
+                self.lives -= 1
                 self.enemies.remove(delete)
 
             # Adding Money
@@ -101,13 +148,11 @@ class Game:
                 self.money += towers.attack(self.enemies)
 
             # Game Over
-            if self.life <= 0:
+            if self.lives <= 0:
                 print("GAME OVER" + "\n" + "YOU LOSE")
                 run = False
 
             # Drawing Circles (path)
-
-
             '''if event.type == pygame.MOUSEBUTTONDOWN:
                 self.clicks.append(pos)
                 print(self.clicks)'''
@@ -136,14 +181,14 @@ class Game:
             self.movingTowers.draw(self.window)
 
         # Draw Lives
-        text = self.life_font.render(str(self.life), 1, (255, 255, 255))
+        text = self.life_font.render(str(self.lives), 1, (255, 255, 255))
         life = pygame.transform.scale(lives_img, (50, 50))
         start_x = self.width - life.get_width() - 10
 
         self.window.blit(text, (start_x - text.get_width() - 10, 13))
         self.window.blit(life, (start_x, 10))
 
-        # draw money
+        # Draw Money
         text = self.life_font.render(str(self.money), 1, (0, 0, 0))
         money = pygame.transform.scale(coin_img, (50, 50))
         start_x = self.width - life.get_width() - 10
@@ -162,11 +207,17 @@ class Game:
 
         pygame.display.update()
 
+    # Buy Towers From Shop
+
     def buy_towers(self, tower):
+        # Get mouse position
         x, y = pygame.mouse.get_pos()
+
+        # Tower
         towerName = ["ShortTower", "LongTower"]
         towerSelf = [ShortTower(x, y), LongTower(x, y)]
 
+        # Buy towers and add them in
         try:
             buy = towerSelf[towerName.index(tower)]
             self.movingTowers = buy
@@ -176,6 +227,7 @@ class Game:
             print(E)
 
 
+# Run game
 pygame.display.set_caption("ROFENCE")
 game = Game()
 game.run()
