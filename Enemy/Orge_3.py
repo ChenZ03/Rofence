@@ -9,7 +9,7 @@ images = []
 
 
 # add image for the Orge3
-for x in range(7):
+for x in range(3):
     string = str(x)
     images.append(pygame.transform.scale(
         pygame.image.load(os.path.join("Assets/ORG/3_ORK/WALK", "WALK_00" + string + ".png")), (50, 50)))
