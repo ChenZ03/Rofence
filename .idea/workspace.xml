@@ -10,11 +10,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1958">
-              <caret line="98" column="38" lean-forward="true" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
+            <state relative-caret-position="973">
+              <caret line="170" column="55" lean-forward="true" selection-start-line="170" selection-start-column="55" selection-end-line="170" selection-end-column="55" />
+              <folding>
+                <element signature="e#10#23#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -22,7 +25,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Enemy/Orge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="478">
               <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
               <folding>
                 <element signature="e#10#23#0" expanded="true" />
@@ -34,19 +37,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Enemy/Orge_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
+            <state relative-caret-position="572">
               <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-              <folding>
-                <element signature="e#9#22#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Enemy/Orge_3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="374">
               <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
             </state>
           </provider>
@@ -55,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Shop/Shop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2158">
-              <caret line="42" column="65" selection-start-line="42" selection-start-column="65" selection-end-line="42" selection-end-column="65" />
+            <state relative-caret-position="1180">
+              <caret line="156" column="35" lean-forward="true" selection-start-line="156" selection-start-column="35" selection-end-line="156" selection-end-column="35" />
               <folding>
                 <element signature="e#10#23#0" expanded="true" />
               </folding>
@@ -67,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Towers/LongTower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-870">
-              <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="33" />
+            <state relative-caret-position="425">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
               <folding>
                 <element signature="e#10#23#0" expanded="true" />
               </folding>
@@ -79,11 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Enemy/Enemies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1420">
-              <caret line="23" column="22" lean-forward="true" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="9">
+              <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -91,8 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Towers/ShortTower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+            <state relative-caret-position="450">
+              <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -103,11 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Towers/Tower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-79">
+            <state relative-caret-position="527">
               <caret line="34" selection-start-line="34" selection-end-line="34" />
-              <folding>
-                <element signature="e#27#33#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -133,15 +127,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Towers/canonTower.py" />
-        <option value="$PROJECT_DIR$/Towers/LongTower.py" />
-        <option value="$PROJECT_DIR$/Towers/ShortTower.py" />
-        <option value="$PROJECT_DIR$/Enemy/Enemies.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/Shop/Shop.py" />
         <option value="$PROJECT_DIR$/Towers/Tower.py" />
         <option value="$PROJECT_DIR$/Enemy/Orge_2.py" />
         <option value="$PROJECT_DIR$/Enemy/Orge.py" />
         <option value="$PROJECT_DIR$/Enemy/Orge_3.py" />
+        <option value="$PROJECT_DIR$/Towers/LongTower.py" />
+        <option value="$PROJECT_DIR$/Towers/ShortTower.py" />
+        <option value="$PROJECT_DIR$/Shop/Shop.py" />
+        <option value="$PROJECT_DIR$/Enemy/Enemies.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -156,7 +150,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -187,14 +180,6 @@
               <item name="TowerDefence" type="462c0819:PsiDirectoryNode" />
               <item name="Assets" type="462c0819:PsiDirectoryNode" />
               <item name="ORG" type="462c0819:PsiDirectoryNode" />
-              <item name="1_ORK" type="462c0819:PsiDirectoryNode" />
-              <item name="WALK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TowerDefence" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TowerDefence" type="462c0819:PsiDirectoryNode" />
-              <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="ORG" type="462c0819:PsiDirectoryNode" />
               <item name="2_ORK" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -204,34 +189,6 @@
               <item name="ORG" type="462c0819:PsiDirectoryNode" />
               <item name="2_ORK" type="462c0819:PsiDirectoryNode" />
               <item name="RUN" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TowerDefence" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TowerDefence" type="462c0819:PsiDirectoryNode" />
-              <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="ORG" type="462c0819:PsiDirectoryNode" />
-              <item name="3_ORK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TowerDefence" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TowerDefence" type="462c0819:PsiDirectoryNode" />
-              <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="ORG" type="462c0819:PsiDirectoryNode" />
-              <item name="3_ORK" type="462c0819:PsiDirectoryNode" />
-              <item name="WALK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TowerDefence" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TowerDefence" type="462c0819:PsiDirectoryNode" />
-              <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="Stone_tower" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TowerDefence" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TowerDefence" type="462c0819:PsiDirectoryNode" />
-              <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="Stone_tower" type="462c0819:PsiDirectoryNode" />
-              <item name="LongRange" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TowerDefence" type="b2602c69:ProjectViewProjectNode" />
@@ -247,12 +204,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/Tower-Defense-Game-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -315,18 +273,19 @@
       <updated>1566312715233</updated>
       <workItem from="1566312718330" duration="1322000" />
       <workItem from="1566371988827" duration="5853000" />
-      <workItem from="1566388637632" duration="4436000" />
+      <workItem from="1566388637632" duration="5872000" />
+      <workItem from="1566462110997" duration="2773000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11611000" />
+    <option name="totallyTimeSpent" value="15820000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16577825" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1673774" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -353,53 +312,33 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TowerDefence$main.coverage" NAME="main Coverage Results" MODIFIED="1566393116759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TowerDefence$main.coverage" NAME="main Coverage Results" MODIFIED="1566466832356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Towers/canonTower.py" />
     <entry file="file://$PROJECT_DIR$/Assets/Stone_tower/1.png" />
     <entry file="file://$PROJECT_DIR$/Assets/Stone_tower/2.png" />
+    <entry file="file://$PROJECT_DIR$/Enemy/Orge_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Towers/LongTower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-870">
-          <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="33" />
+        <state relative-caret-position="425">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
           <folding>
             <element signature="e#10#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1958">
-          <caret line="98" column="38" lean-forward="true" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Shop/Shop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2158">
-          <caret line="42" column="65" selection-start-line="42" selection-start-column="65" selection-end-line="42" selection-end-column="65" />
-          <folding>
-            <element signature="e#10#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Enemy/Enemies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1420">
-          <caret line="23" column="22" lean-forward="true" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Towers/ShortTower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+        <state relative-caret-position="450">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -408,27 +347,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Towers/Tower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-79">
+        <state relative-caret-position="527">
           <caret line="34" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#27#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Enemy/Orge_2.py">
+    <entry file="file://$PROJECT_DIR$/Shop/Shop.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+        <state relative-caret-position="1180">
+          <caret line="156" column="35" lean-forward="true" selection-start-line="156" selection-start-column="35" selection-end-line="156" selection-end-column="35" />
           <folding>
-            <element signature="e#9#22#0" expanded="true" />
+            <element signature="e#10#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Enemy/Orge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
+        <state relative-caret-position="478">
           <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
           <folding>
             <element signature="e#10#23#0" expanded="true" />
@@ -436,10 +372,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Enemy/Orge_3.py">
+    <entry file="file://$PROJECT_DIR$/Enemy/Orge_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+        <state relative-caret-position="572">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Enemy/Enemies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9">
+          <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="973">
+          <caret line="170" column="55" lean-forward="true" selection-start-line="170" selection-start-column="55" selection-end-line="170" selection-end-column="55" />
+          <folding>
+            <element signature="e#10#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

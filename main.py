@@ -15,13 +15,15 @@ from Towers.LongTower import LongTower
 from Towers.ShortTower import ShortTower
 
 # Import Shop from other files
-from Shop.Shop import Shop, Button
+from Shop.Shop import Shop, Play
 
 # Load Images and Scale them
 lives_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "lives.png")), (25, 25))
 coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (25, 25))
 Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Rec.png")), (1000, 200))
 Shop_icon = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Blank.png")), (75, 75))
+play = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Play.png")), (60, 60))
+pause = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Pause.png")), (60, 60))
 
 # Name List of Towers
 towers_name = ["LongTower", "ShortTower"]
@@ -72,18 +74,23 @@ class Game:
         # For placing new Towers
         self.movingTowers = None
 
+        # Game Play/Pause
+        self.pause = True
+        self.play_pause = Play(play, pause, 10, 20)
+
     # MAIN RUN
     def run(self):
         run = True
         # Frame
         clock = pygame.time.Clock()
-        clock.tick(200)
+        clock.tick(30)
         while run:
 
             # GENERATE SPAWNS
-            if time.time() - self.timer > 5:
-                self.timer = time.time()
-                self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
+            if self.pause == False:
+                if time.time() - self.timer > 5:
+                    self.timer = time.time()
+                    self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
 
             # Get mouse pos
             pos = pygame.mouse.get_pos()
@@ -102,7 +109,7 @@ class Game:
                 # Mouse position
                 pos = pygame.mouse.get_pos()
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.type == pygame.MOUSEBUTTONUP:
                     # If you are buying towers
                     if self.movingTowers:
 
@@ -112,6 +119,12 @@ class Game:
                         self.movingTowers = None
 
                     else:
+                        # Check for play/pause
+                        if self.play_pause.click(pos[0], pos[1]):
+                            self.pause = not(self.pause)
+                            self.play_pause.img_change()
+
+
                         # Buying Towers From The Shop
                         Shop_btn = self.shop.get_clicked(pos[0], pos[1])
 
@@ -132,25 +145,27 @@ class Game:
                         else:
                             tw.selected = False
 
-            # Loop Through Enemies:
-            delete = []
-            for Enemy in self.enemies:
-                if Enemy.x > 1200:
-                    delete.append(Enemy)
+            if not self.pause:
+                # Loop Through Enemies:
+                delete = []
+                for Enemy in self.enemies:
+                    Enemy.move()
+                    if Enemy.x > 1200:
+                        delete.append(Enemy)
 
-            # Delete end path Enemies
-            for delete in delete:
-                self.lives -= 1
-                self.enemies.remove(delete)
+                # Delete end path Enemies
+                for delete in delete:
+                    self.lives -= 1
+                    self.enemies.remove(delete)
 
-            # Adding Money
-            for towers in self.towers:
-                self.money += towers.attack(self.enemies)
+                # Adding Money
+                for towers in self.towers:
+                    self.money += towers.attack(self.enemies)
 
-            # Game Over
-            if self.lives <= 0:
-                print("GAME OVER" + "\n" + "YOU LOSE")
-                run = False
+                # Game Over
+                if self.lives <= 0:
+                    print("GAME OVER" + "\n" + "YOU LOSE")
+                    run = False
 
             # Drawing Circles (path)
             '''if event.type == pygame.MOUSEBUTTONDOWN:
@@ -195,6 +210,9 @@ class Game:
 
         self.window.blit(text, (start_x - text.get_width() - 10, 75))
         self.window.blit(money, (start_x, 65))
+
+        # Draw play/ pause btn
+        self.play_pause.draw(self.window)
 
         # Draw Shop
         self.shop.draw(self.window)

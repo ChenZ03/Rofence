@@ -29,7 +29,7 @@ class LongTower(Tower):
         self.range = 180
         self.inRange = False
         self.hitTimer = time.time()
-        self.damage = 2
+        self.damage = 1
         self.moving = False
         self.name = "LongTower"
 

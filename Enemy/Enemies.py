@@ -28,12 +28,10 @@ class Enemy:
     def draw(self, window):
         # window = surface
         self.img = self.imgs[self.animation_count]
-        self.animation_count += 1
         if self.animation_count >= len(self.imgs):
             self.animation_count = 0
         window.blit(self.img, (self.x - self.img.get_width()/2, self.y - self.img.get_height()/2))
         self.hpBar(window)
-        self.move()
 
     # Enemy Health Bar
     def hpBar(self, window):

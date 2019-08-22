@@ -137,3 +137,21 @@ class Shop:
     def update(self):
         for btn in self.buttons:
             btn.update()
+
+
+# Play / Pause
+class Play(Button):
+    def __init__(self, play, pause, x, y):
+        self.images = play
+        self.play = play
+        self.pause = pause
+        self.x = x
+        self.y = y
+        self.width = self.images.get_width()
+        self.height = self.images.get_height()
+
+    def img_change(self):
+        if self.images == self.play:
+            self.images = self.pause
+        else:
+            self.images = self.play
