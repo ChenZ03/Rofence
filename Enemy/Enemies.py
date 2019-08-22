@@ -23,6 +23,10 @@ class Enemy:
         self.distance = 0
         self.imgs = []
         self.maxHP = 0
+        self.left = False
+        self.right = False
+        self.up = False
+        self.down = False
 
     # Draw enemies animations
     def draw(self, window):
@@ -35,12 +39,12 @@ class Enemy:
 
     # Enemy Health Bar
     def hpBar(self, window):
-        hpLen = 50
+        hpLen = 40
         hpMove = round(hpLen) / self.maxHP
         healthBar = hpMove * self.health
 
-        pygame.draw.rect(window, (255, 0, 0), (self.x - 25, self.y - 40, hpLen, 10), 0)
-        pygame.draw.rect(window, (0, 255, 0), (self.x - 25, self.y - 40, healthBar, 10), 0)
+        pygame.draw.rect(window, (255, 0, 0), (self.x - 17, self.y - 35, hpLen, 8), 0)
+        pygame.draw.rect(window, (0, 255, 0), (self.x - 17, self.y - 35, healthBar, 8), 0)
 
     def collide(self, X, Y):
         if  X <= self.x + self.width and X >= self.x:
@@ -75,10 +79,13 @@ class Enemy:
 
         # Go to next point
         if direction[0] >= 0:  # moving right
+
             if direction[1] >= 0:  # moving down
+
                 if self.x >= x2 and self.y >= y2:
                     self.path_pos += 1
             else:
+
                 if self.x >= x2 and self.y <= y2:
                     self.path_pos += 1
         else:  # moving left
@@ -88,6 +95,8 @@ class Enemy:
             else:
                 if self.x <= x2 and self.y >= y2:
                     self.path_pos += 1"""
+
+        return self.up, self.right, self.down
 
     # Check enemy is dead or na
     def hit(self, damage):

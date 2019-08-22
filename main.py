@@ -82,6 +82,7 @@ class Game:
     def run(self):
         run = True
         # Frame
+        pygame.time.delay(50)
         clock = pygame.time.Clock()
         clock.tick(30)
         while run:

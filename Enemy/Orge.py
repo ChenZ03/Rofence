@@ -3,15 +3,16 @@ import pygame
 import os
 from .Enemies import Enemy
 
+
 # create an empty list for Orge.images
 Orge_images = []
 
 
 # add image for Orge
-for x in range(4):
+for x in range(10):
     string = str(x)
     Orge_images.append(pygame.transform.scale(
-        pygame.image.load(os.path.join("Assets/ORG/1_ORK/WALK", "WALK_00" + string + ".png")), (50, 50)))
+        pygame.image.load(os.path.join("Rofence/Robot", "Robot_00" + string + ".png")), (50, 50)))
 
 
 # to create class for orge and inherit properties from Enemy file
