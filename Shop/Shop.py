@@ -5,7 +5,7 @@ pygame.font.init()
 
 
 # Load Coin image
-coin = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (45, 45))
+coin = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (35, 35))
 coint = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (75, 75))
 
 
@@ -108,8 +108,8 @@ class Shop:
     def add_btn(self, image, name, cost):
         self.cost = cost
         self.item += 1
-        button_X = self.x - 20 + (self.item - 1) * 400
-        button_Y = self.y + 620
+        button_X = self.x + 500 + (self.item - 1) * 200
+        button_Y = self.y + 630
         self.buttons.append(Button(button_X, button_Y, image, name, cost))
 
     #
@@ -118,7 +118,7 @@ class Shop:
 
     # to render window for 'shop'
     def draw(self, window):
-        window.blit(self.image, (100, 600))
+        window.blit(self.image, (715, 620))
         for item in self.buttons:
             item.draw(window)
             window.blit(coin, (item.x + item.width + 5, item.y - 9))

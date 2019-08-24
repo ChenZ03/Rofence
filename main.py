@@ -20,9 +20,9 @@ from Shop.Shop import Shop, Play
 # Load Images and Scale them
 lives_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "heart.png")), (25, 25))
 coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (25, 25))
-Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "shop_menu.png")), (1000, 200))
-Shop_icon1 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Shop_001.png")), (75, 75))
-Shop_icon2 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Shop_002.png")), (75, 75))
+Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "shop_menu.png")), (450, 70))
+Shop_icon1 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Shop_001.png")), (50, 50))
+Shop_icon2 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Shop_002.png")), (50, 50))
 play = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Play.png")), (60, 60))
 pause = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Pause.png")), (60, 60))
 
@@ -64,10 +64,10 @@ class Game:
         self.selectedTowers = None
 
         # Main Font
-        self.life_font = pygame.font.SysFont("comicsans", 50)
+        self.life_font = pygame.font.SysFont("comicsansms", 35)
 
         # Shop's settings
-        self.shop_font = pygame.font.SysFont("Times New Roman", 40)
+        self.shop_font = pygame.font.SysFont("Times New Roman", 25)
         self.shop = Shop(300, 0, Shop_img)
         self.shop.add_btn(Shop_icon1, "ShortTower", 100)
         self.shop.add_btn(Shop_icon2, "LongTower", 300)
@@ -204,7 +204,7 @@ class Game:
         life = pygame.transform.scale(lives_img, (45, 45))
         start_x = self.width - life.get_width() - 10
 
-        self.window.blit(text, (start_x - 700, 24))
+        self.window.blit(text, (start_x - 700, 15))
         self.window.blit(life, (start_x - 650, 15))
 
         # Draw Money
@@ -212,7 +212,7 @@ class Game:
         Energy = pygame.transform.scale(coin_img, (50, 50))
         start_x = self.width - life.get_width() - 10
 
-        self.window.blit(text, (start_x - 400, 24))
+        self.window.blit(text, (start_x - 400, 15))
         self.window.blit(Energy, (start_x - 335, 15))
 
         # Draw play/ pause btn
@@ -220,12 +220,12 @@ class Game:
 
         # Draw Shop
         self.shop.draw(self.window)
-        start_x = self.width - (self.width - 365)
-        end_x = self.width - 440
+        start_x = self.width - (self.width - 855)
+        end_x = self.width - 140
         cost1 = self.shop_font.render(str(100), 1, (0, 0, 0))
         cost2 = self.shop_font.render(str(300), 1, (0, 0, 0))
-        self.window.blit(cost1, (start_x, 660))
-        self.window.blit(cost2, (end_x, 660))
+        self.window.blit(cost1, (start_x, 655))
+        self.window.blit(cost2, (end_x, 655))
 
         pygame.display.update()
 
@@ -250,7 +250,6 @@ class Game:
 
 
 # Run game
-pygame.display.set_caption("ROFENCE")
 game = Game()
 game.run()
 
