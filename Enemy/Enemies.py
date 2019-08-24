@@ -2,6 +2,7 @@
 import pygame
 from pygame import *
 import math
+import time
 
 
 class Enemy:
@@ -11,7 +12,7 @@ class Enemy:
         self.height = 32
         self.img = None
         # Path for enemies to walk on
-        self.path = [(-10, 386), (27, 386), (192, 378), (201, 176), (438, 173), (438, 450), (740, 446), (762, 316), (1186, 313), (1300, 313)]
+        self.path = [(-10, 353), (14, 353), (182, 354), (185, 591), (582, 583), (598, 581), (598, 528), (598, 442), (598, 393), (598, 302), (598, 115), (1167, 121), (1198, 116), (1300, 116)]
 
         self.x = self.path[0][0]
         self.y = self.path[0][1]
@@ -31,6 +32,7 @@ class Enemy:
     # Draw enemies animations
     def draw(self, window):
         # window = surface
+
         self.img = self.imgs[self.animation_count]
         if self.animation_count >= len(self.imgs):
             self.animation_count = 0
@@ -53,6 +55,9 @@ class Enemy:
 
     # Enemy move towards the path from one to another
     def move(self):
+        start_frame = time.time()
+        noi = 16
+        frames_per_second = 10
         self.animation_count += 1
         if self.animation_count >= len(self.imgs):
             self.animation_count = 0

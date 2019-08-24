@@ -9,10 +9,10 @@ images = []
 
 
 # add image for the Orge3
-for x in range(4):
+for x in range(10):
     string = str(x)
     images.append(pygame.transform.scale(
-        pygame.image.load(os.path.join("Assets/ORG/3_ORK/RUN", "RUN_00" + string + ".png")), (50, 50)))
+        pygame.image.load(os.path.join("Assets/ROFENCE/Robot", "tanker_00" + string + ".png")), (50, 50)))
 
 
 # create a class for orge while inherit properties from Enemy File

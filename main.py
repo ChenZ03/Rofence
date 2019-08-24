@@ -18,10 +18,11 @@ from Towers.ShortTower import ShortTower
 from Shop.Shop import Shop, Play
 
 # Load Images and Scale them
-lives_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "lives.png")), (25, 25))
-coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (25, 25))
-Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Rec.png")), (1000, 200))
-Shop_icon = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Blank.png")), (75, 75))
+lives_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "heart.png")), (25, 25))
+coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (25, 25))
+Shop_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "shop_menu.png")), (1000, 200))
+Shop_icon1 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Shop_001.png")), (75, 75))
+Shop_icon2 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Shop_002.png")), (75, 75))
 play = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Play.png")), (60, 60))
 pause = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Pause.png")), (60, 60))
 
@@ -50,7 +51,7 @@ class Game:
         self.money = 100
 
         # Initialize Background image
-        self.background = pygame.image.load(os.path.join("Assets", "bg.png"))
+        self.background = pygame.image.load(os.path.join("Assets", "map rotated.png"))
         self.background = pygame.transform.scale(self.background, (self.width, self.height))
 
         # Mouse clicks list
@@ -63,13 +64,13 @@ class Game:
         self.selectedTowers = None
 
         # Main Font
-        self.life_font = pygame.font.SysFont("comicsans", 65)
+        self.life_font = pygame.font.SysFont("comicsans", 50)
 
         # Shop's settings
         self.shop_font = pygame.font.SysFont("Times New Roman", 40)
         self.shop = Shop(300, 0, Shop_img)
-        self.shop.add_btn(Shop_icon, "ShortTower", 100)
-        self.shop.add_btn(Shop_icon, "LongTower", 300)
+        self.shop.add_btn(Shop_icon1, "ShortTower", 100)
+        self.shop.add_btn(Shop_icon2, "LongTower", 300)
 
         # For placing new Towers
         self.movingTowers = None
@@ -82,13 +83,13 @@ class Game:
     def run(self):
         run = True
         # Frame
-        pygame.time.delay(50)
         clock = pygame.time.Clock()
-        clock.tick(30)
+
         while run:
+            clock.tick(40)
 
             # GENERATE SPAWNS
-            if self.pause == False:
+            if not self.pause:
                 if time.time() - self.timer > 5:
                     self.timer = time.time()
                     self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
@@ -111,6 +112,8 @@ class Game:
                 pos = pygame.mouse.get_pos()
 
                 if event.type == pygame.MOUSEBUTTONUP:
+                    self.clicks.append(pos)
+                    print(self.clicks)
                     # If you are buying towers
                     if self.movingTowers:
 
@@ -198,19 +201,19 @@ class Game:
 
         # Draw Lives
         text = self.life_font.render(str(self.lives), 1, (255, 255, 255))
-        life = pygame.transform.scale(lives_img, (50, 50))
+        life = pygame.transform.scale(lives_img, (45, 45))
         start_x = self.width - life.get_width() - 10
 
-        self.window.blit(text, (start_x - text.get_width() - 10, 13))
-        self.window.blit(life, (start_x, 10))
+        self.window.blit(text, (start_x - 700, 24))
+        self.window.blit(life, (start_x - 650, 15))
 
         # Draw Money
-        text = self.life_font.render(str(self.money), 1, (0, 0, 0))
-        money = pygame.transform.scale(coin_img, (50, 50))
+        text = self.life_font.render(str(self.money), 1, (255, 255, 255))
+        Energy = pygame.transform.scale(coin_img, (50, 50))
         start_x = self.width - life.get_width() - 10
 
-        self.window.blit(text, (start_x - text.get_width() - 10, 75))
-        self.window.blit(money, (start_x, 65))
+        self.window.blit(text, (start_x - 400, 24))
+        self.window.blit(Energy, (start_x - 335, 15))
 
         # Draw play/ pause btn
         self.play_pause.draw(self.window)

@@ -5,8 +5,8 @@ pygame.font.init()
 
 
 # Load Coin image
-coin = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (45, 45))
-coint = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "coin.png")), (75, 75))
+coin = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (45, 45))
+coint = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (75, 75))
 
 
 # create a class and inherit
@@ -20,7 +20,7 @@ class Menu:
         self.buttons = []
         self.items = 0
         self.background = images
-        self.font = pygame.font.SysFont("comicsans", 25)
+        self.font = pygame.font.SysFont("comicsans", 20)
         self.tower = tower
 
     # add button for 'shop'
@@ -102,7 +102,7 @@ class Shop:
         self.width = image.get_width()
         self.height = image.get_height()
         self.cost = 0
-        self.font = pygame.font.SysFont("Times New Roman", 25)
+        self.font = pygame.font.SysFont("Times New Roman", 20)
 
     # add button for shop
     def add_btn(self, image, name, cost):
