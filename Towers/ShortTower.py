@@ -69,12 +69,12 @@ class ShortTower(Tower):
                 self.inRange = True
                 closest_enemy.append(enemy)
 
-        closest_enemy.sort(key=lambda x: x.path_pos)
-        closest_enemy = closest_enemy[::-1]
         if len(closest_enemy) > 0:
             first_enemy = closest_enemy[0]
-            if self.bullet_count == 50:
-                if first_enemy.hit(self.damage) == True:
-                    money = first_enemy.money * 2
+            if time.time() - self.hitTimer >= 0.5:
+                self.hitTimer = time.time()
+                if first_enemy.hit(self.damage):
+                    money = first_enemy.money
                     enemies.remove(first_enemy)
+
         return money

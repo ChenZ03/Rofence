@@ -164,13 +164,8 @@ class Game:
                     print(self.clicks)
                     # If you are buying towers
                     if self.movingTowers:
-                        allowed = True
-                        for tower in self.towers:
-                            if tower.collide(self.movingTowers):
-                                allowed = False
-                        if allowed:
-                            if self.movingTowers.name in towers_name:
-                                self.towers.append(self.movingTowers)
+                        if self.movingTowers.name in towers_name:
+                            self.towers.append(self.movingTowers)
 
                         self.movingTowers = None
 
@@ -240,13 +235,6 @@ class Game:
         # Draw Clicks
         '''for p in self.clicks:
             pygame.draw.circle(self.window, (255, 0, 0), (p[0], p[1]), 5, 0)'''
-
-        # Draw placement
-        if self.movingTowers:
-            for towers in self.towers:
-                towers.draw_placement(self.window)
-
-            self.movingTowers.draw_placement(self.window)
 
         # Draw Enemy
         for enemies in self.enemies:
