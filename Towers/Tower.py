@@ -2,6 +2,7 @@
 import pygame
 from pygame import *
 from Shop.Shop import Menu
+import math
 import os
 
 # Shop's background
@@ -27,6 +28,13 @@ class Tower:
     def draw(self, window):
         img = self.tower_imgs[self.level - 1]
         window.blit(img, (self.x - img.get_width() // 2, self.y - img.get_height() // 2))
+
+    def draw_placement(self, win):
+        # draw range circle
+        surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
+        pygame.draw.circle(surface, self.place_color, (50, 50), 50, 0)
+
+        win.blit(surface, (self.x - 50, self.y - 50))
 
     def click(self, X, Y):
         if  X <= self.x + self.width and X >= self.x:

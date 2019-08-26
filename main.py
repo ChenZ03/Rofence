@@ -25,9 +25,27 @@ Shop_icon1 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFEN
 Shop_icon2 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Shop_002.png")), (50, 50))
 play = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Play.png")), (60, 60))
 pause = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Pause.png")), (60, 60))
+wave_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "wave.png")), (300, 120))
+
 
 # Name List of Towers
 towers_name = ["LongTower", "ShortTower"]
+
+waves = [
+    [20, 0, 0],
+    [50, 0, 0],
+    [100, 0, 0],
+    [0, 20, 0],
+    [0, 50, 0],
+    [0, 100, 0],
+    [20, 100, 0],
+    [50, 100, 0],
+    [100, 100, 0],
+    [0, 0, 50],
+    [20, 0, 100],
+    [20, 0, 150],
+    [200, 100, 200],
+]
 
 
 # Main game class
@@ -79,7 +97,36 @@ class Game:
         self.pause = True
         self.play_pause = Play(play, pause, 10, 20)
 
+        # Enemy Waves
+        self.wave = 1
+        self.current_wave = waves[self.wave][:]
+        self.wave_font = pygame.font.SysFont("comicsansms", 50)
+
+        # Tower path
+        self.path = []
+
+    def gen_enemies(self):
+        """
+        generate the next enemy or enemies to show
+        :return: enemy
+        """
+        if sum(self.current_wave) == 0:
+            if len(self.enemies) == 0:
+                self.wave += 1
+                self.current_wave = waves[self.wave]
+                self.pause = True
+                self.play_pause.paused = self.pause
+                self.play_pause.img_change()
+        else:
+            wave_enemies = [Orge(), Orge2(), Orge3()]
+            for x in range(len(self.current_wave)):
+                if self.current_wave[x] != 0:
+                    self.enemies.append(wave_enemies[x])
+                    self.current_wave[x] = self.current_wave[x] - 1
+                    break
+
     # MAIN RUN
+
     def run(self):
         run = True
         # Frame
@@ -90,9 +137,10 @@ class Game:
 
             # GENERATE SPAWNS
             if not self.pause:
-                if time.time() - self.timer > 5:
+                # gen monsters
+                if time.time() - self.timer >= random.randrange(1, 6) / 3:
                     self.timer = time.time()
-                    self.enemies.append(random.choice([Orge(), Orge2(), Orge3()]))
+                    self.gen_enemies()
 
             # Get mouse pos
             pos = pygame.mouse.get_pos()
@@ -116,9 +164,13 @@ class Game:
                     print(self.clicks)
                     # If you are buying towers
                     if self.movingTowers:
-
-                        if self.movingTowers.name in towers_name:
-                            self.towers.append(self.movingTowers)
+                        allowed = True
+                        for tower in self.towers:
+                            if tower.collide(self.movingTowers):
+                                allowed = False
+                        if allowed:
+                            if self.movingTowers.name in towers_name:
+                                self.towers.append(self.movingTowers)
 
                         self.movingTowers = None
 
@@ -127,7 +179,6 @@ class Game:
                         if self.play_pause.click(pos[0], pos[1]):
                             self.pause = not(self.pause)
                             self.play_pause.img_change()
-
 
                         # Buying Towers From The Shop
                         Shop_btn = self.shop.get_clicked(pos[0], pos[1])
@@ -183,9 +234,19 @@ class Game:
     def draw(self):
         self.window.blit(self.background, (0, 0))
 
+        for pos in self.path:
+            pygame.draw.circle(self.window, (255, 0, 0), pos, 5, 0)
+
         # Draw Clicks
         '''for p in self.clicks:
             pygame.draw.circle(self.window, (255, 0, 0), (p[0], p[1]), 5, 0)'''
+
+        # Draw placement
+        if self.movingTowers:
+            for towers in self.towers:
+                towers.draw_placement(self.window)
+
+            self.movingTowers.draw_placement(self.window)
 
         # Draw Enemy
         for enemies in self.enemies:
@@ -213,7 +274,7 @@ class Game:
         start_x = self.width - life.get_width() - 10
 
         self.window.blit(text, (start_x - 400, 15))
-        self.window.blit(Energy, (start_x - 335, 15))
+        self.window.blit(Energy, (start_x - 320, 15))
 
         # Draw play/ pause btn
         self.play_pause.draw(self.window)
@@ -222,10 +283,16 @@ class Game:
         self.shop.draw(self.window)
         start_x = self.width - (self.width - 855)
         end_x = self.width - 140
+        shop_title = self.life_font.render("ROFENCE SHOP :", 1, (255, 255, 255))
         cost1 = self.shop_font.render(str(100), 1, (0, 0, 0))
         cost2 = self.shop_font.render(str(300), 1, (0, 0, 0))
         self.window.blit(cost1, (start_x, 655))
         self.window.blit(cost2, (end_x, 655))
+        self.window.blit(shop_title, (start_x - 50, 560))
+
+        # Draw Wave
+        text = self.life_font.render("Wave #" + str(self.wave), 1, (255, 255, 255))
+        self.window.blit(text, (30, 640))
 
         pygame.display.update()
 

@@ -74,12 +74,13 @@ class LongTower(Tower):
                 closest_enemy.append(enemy)
 
         # Attck closest enemy and add money
-        if len(closest_enemy) > 0 :
+        closest_enemy.sort(key=lambda x: x.path_pos)
+        closest_enemy = closest_enemy[::-1]
+        if len(closest_enemy) > 0:
             first_enemy = closest_enemy[0]
-            if time.time() - self.hitTimer >= 1.5:
-                self.hitTimer = time.time()
+            if self.bullet_count == 50:
                 if first_enemy.hit(self.damage) == True:
-                    money = first_enemy.money
+                    money = first_enemy.money * 2
                     enemies.remove(first_enemy)
 
         return money
