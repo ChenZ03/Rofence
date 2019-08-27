@@ -20,7 +20,7 @@ class Robot(Enemy):
     # define the details of the Robot
     def __init__(self):
         super().__init__()
-        self.maxHP = 3
+        self.maxHP = 8
         self.health = self.maxHP
         self.money = 8
         self.imgs = Robot_images[:]

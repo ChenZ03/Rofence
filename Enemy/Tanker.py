@@ -20,7 +20,7 @@ class Tanker(Enemy):
 
     def __init__(self):
         super().__init__()
-        self.maxHP = 5
+        self.maxHP = 15
         self.health = self.maxHP
         self.money = 16
         self.imgs = images[:]
