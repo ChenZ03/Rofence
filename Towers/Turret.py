@@ -9,9 +9,6 @@ Bullet_images = []
 
 # Load imgs for Short tower:
 ShortTower_images.append(pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE/Tower/Ice tower", "Ice.png")), (135, 135)))
-# Load bullet imgs:
-for i in range(0, 6):
-    Bullet_images.append(pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE/Tower/Turret", "Bullet_00"+ str(i) + ".png")), (450, 280)))
 
 
 # Short Tower Class (inherit from Tower Class)
