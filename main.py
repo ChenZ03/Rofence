@@ -11,8 +11,8 @@ from Enemy.Robot import Robot
 from Enemy.Tanker import Tanker
 
 # Import Tower from other files
-from Towers.LongTower import LongTower
-from Towers.ShortTower import ShortTower
+from Towers.Missle_tower import LongTower
+from Towers.Turret import ShortTower
 
 # Import Shop from other files
 from Shop.Shop import Shop, Play
@@ -59,14 +59,14 @@ class Game:
         self.window = pygame.display.set_mode((self.width, self.height))
 
         # List of Towers
-        self.towers = [ShortTower(280, 320)]
+        self.towers = []
 
         # list of enemies ----- Jet() as the first enemy
         self.enemies = [Jet()]
 
         # Lives and Money
         self.lives = 10
-        self.money = 100
+        self.money = 1000
 
         # Initialize Background image
         self.background = pygame.image.load(os.path.join("Assets", "map rotated.png"))
