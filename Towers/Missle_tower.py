@@ -73,8 +73,8 @@ class LongTower(Tower):
                 self.inRange = True
                 closest_enemy.append(enemy)
 
-        # Attck closest enemy and add money
-        if len(closest_enemy) > 0 :
+        # Attack closest enemy and add money
+        if len(closest_enemy) > 0:
             first_enemy = closest_enemy[0]
             if time.time() - self.hitTimer >= 1.5:
                 self.hitTimer = time.time()

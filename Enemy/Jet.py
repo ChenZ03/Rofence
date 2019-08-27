@@ -18,7 +18,7 @@ class Jet(Enemy):
 
     def __init__(self):
         super().__init__()
-        self.maxHP = 4
+        self.maxHP = 5
         self.health = self.maxHP
         self.money = 4
         self.imgs = Jet_images[:]

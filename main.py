@@ -16,7 +16,7 @@ from Towers.Turret import ShortTower
 
 # Import Shop from other files
 from Shop.Shop import Shop, Play
-
+pygame.mixer.init()
 # Load Images and Scale them
 lives_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "heart.png")), (25, 25))
 coin_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE", "Energy.png")), (25, 25))
@@ -26,7 +26,9 @@ Shop_icon2 = pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFEN
 play = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Play.png")), (60, 60))
 pause = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "Pause.png")), (60, 60))
 wave_img = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "wave.png")), (300, 120))
-
+mute = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "mute.png")), (60, 60))
+unmute = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "unmute.png")), (60, 60))
+Game_over = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "ending.png")), (1200, 700))
 
 # Name List of Towers
 towers_name = ["LongTower", "ShortTower"]
@@ -47,12 +49,15 @@ waves = [
     [20, 30, 50],
 ]
 
+pygame.mixer.music.load(os.path.join("Assets", "bg.mp3"))
+
 
 # Main game class
 class Game:
     # Initialize Game Variables
     def __init__(self):
         pygame.init()
+        self.gameOver = False
         # Height of the Window
         self.height = 700
         self.width = 1200
@@ -62,11 +67,11 @@ class Game:
         self.towers = []
 
         # list of enemies ----- Jet() as the first enemy
-        self.enemies = [Jet()]
+        self.enemies = []
 
         # Lives and Money
         self.lives = 10
-        self.money = 1000
+        self.money = 300
 
         # Initialize Background image
         self.background = pygame.image.load(os.path.join("Assets", "map rotated.png"))
@@ -96,6 +101,8 @@ class Game:
         # Game Play/Pause
         self.pause = True
         self.play_pause = Play(play, pause, 10, 20)
+        self.music = False
+        self.music_btn = Play(mute, unmute, 920, 10)
 
         # Enemy Waves
         self.wave = 1
@@ -106,10 +113,7 @@ class Game:
         self.path = []
 
     def gen_enemies(self):
-        """
-        generate the next enemy or enemies to show
-        :return: enemy
-        """
+
         if sum(self.current_wave) == 0:
             if len(self.enemies) == 0:
                 self.wave += 1
@@ -128,12 +132,18 @@ class Game:
     # MAIN RUN
 
     def run(self):
+        pygame.mixer.music.play(-1)
         run = True
         # Frame
         clock = pygame.time.Clock()
 
         while run:
             clock.tick(40)
+            # Music
+            if self.music:
+                pygame.mixer.music.unpause()
+            if not self.music:
+                pygame.mixer.music.pause()
 
             # GENERATE SPAWNS
             if not self.pause:
@@ -175,6 +185,11 @@ class Game:
                             self.pause = not(self.pause)
                             self.play_pause.img_change()
 
+                        # Check for Music On/Off
+                        if self.music_btn.click(pos[0], pos[1]):
+                            self.music = not self.music
+                            self.music_btn.img_change()
+
                         # Buying Towers From The Shop
                         Shop_btn = self.shop.get_clicked(pos[0], pos[1])
 
@@ -214,8 +229,10 @@ class Game:
 
                 # Game Over
                 if self.lives <= 0:
-                    print("GAME OVER" + "\n" + "YOU LOSE")
-                    run = False
+                    self.gameOver = True
+                    pygame.mixer.music.stop()
+                    game = pygame.mixer.Sound(os.path.join("Assets", "GameOver.wav"))
+                    game.play(0)
 
             # Drawing Circles (path)
             '''if event.type == pygame.MOUSEBUTTONDOWN:
@@ -227,60 +244,66 @@ class Game:
         pygame.quit()
 
     def draw(self):
-        self.window.blit(self.background, (0, 0))
+        if self.gameOver:
+            self.window.blit(Game_over, (0, 0))
+        else:
+            self.window.blit(self.background, (0, 0))
 
-        for pos in self.path:
-            pygame.draw.circle(self.window, (255, 0, 0), pos, 5, 0)
+            for pos in self.path:
+                pygame.draw.circle(self.window, (255, 0, 0), pos, 5, 0)
 
-        # Draw Clicks
-        '''for p in self.clicks:
-            pygame.draw.circle(self.window, (255, 0, 0), (p[0], p[1]), 5, 0)'''
+            # Draw Clicks
+            '''for p in self.clicks:
+                pygame.draw.circle(self.window, (255, 0, 0), (p[0], p[1]), 5, 0)'''
 
-        # Draw Enemy
-        for enemies in self.enemies:
-            enemies.draw(self.window)
+            # Draw Enemy
+            for enemies in self.enemies:
+                enemies.draw(self.window)
 
-        # Draw Towers
-        for tower in self.towers:
-            tower.draw(self.window)
+            # Draw Towers
+            for tower in self.towers:
+                tower.draw(self.window)
 
-        # Draw Buying_towers
-        if self.movingTowers:
-            self.movingTowers.draw(self.window)
+            # Draw Buying_towers
+            if self.movingTowers:
+                self.movingTowers.draw(self.window)
 
-        # Draw Lives
-        text = self.life_font.render(str(self.lives), 1, (255, 255, 255))
-        life = pygame.transform.scale(lives_img, (45, 45))
-        start_x = self.width - life.get_width() - 10
+            # Draw Lives
+            text = self.life_font.render(str(self.lives), 1, (255, 255, 255))
+            life = pygame.transform.scale(lives_img, (45, 45))
+            start_x = self.width - life.get_width() - 10
 
-        self.window.blit(text, (start_x - 700, 15))
-        self.window.blit(life, (start_x - 650, 15))
+            self.window.blit(text, (start_x - 700, 15))
+            self.window.blit(life, (start_x - 650, 15))
 
-        # Draw Money
-        text = self.life_font.render(str(self.money), 1, (255, 255, 255))
-        Energy = pygame.transform.scale(coin_img, (50, 50))
-        start_x = self.width - life.get_width() - 10
+            # Draw Money
+            text = self.life_font.render(str(self.money), 1, (255, 255, 255))
+            Energy = pygame.transform.scale(coin_img, (50, 50))
+            start_x = self.width - life.get_width() - 10
 
-        self.window.blit(text, (start_x - 400, 15))
-        self.window.blit(Energy, (start_x - 320, 15))
+            self.window.blit(text, (start_x - 400, 15))
+            self.window.blit(Energy, (start_x - 320, 15))
 
-        # Draw play/ pause btn
-        self.play_pause.draw(self.window)
+            # Draw play/ pause btn
+            self.play_pause.draw(self.window)
 
-        # Draw Shop
-        self.shop.draw(self.window)
-        start_x = self.width - (self.width - 855)
-        end_x = self.width - 140
-        shop_title = self.life_font.render("ROFENCE SHOP :", 1, (255, 255, 255))
-        cost1 = self.shop_font.render(str(100), 1, (0, 0, 0))
-        cost2 = self.shop_font.render(str(300), 1, (0, 0, 0))
-        self.window.blit(cost1, (start_x, 655))
-        self.window.blit(cost2, (end_x, 655))
-        self.window.blit(shop_title, (start_x - 50, 560))
+            # Draw music On/off btn
+            self.music_btn.draw(self.window)
 
-        # Draw Wave
-        text = self.life_font.render("Wave #" + str(self.wave), 1, (255, 255, 255))
-        self.window.blit(text, (30, 640))
+            # Draw Shop
+            self.shop.draw(self.window)
+            start_x = self.width - (self.width - 855)
+            end_x = self.width - 140
+            shop_title = self.life_font.render("ROFENCE SHOP :", 1, (255, 255, 255))
+            cost1 = self.shop_font.render(str(100), 1, (0, 0, 0))
+            cost2 = self.shop_font.render(str(300), 1, (0, 0, 0))
+            self.window.blit(cost1, (start_x, 655))
+            self.window.blit(cost2, (end_x, 655))
+            self.window.blit(shop_title, (start_x - 50, 560))
+
+            # Draw Wave
+            text = self.life_font.render("Wave #" + str(self.wave), 1, (255, 255, 255))
+            self.window.blit(text, (30, 640))
 
         pygame.display.update()
 
