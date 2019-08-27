@@ -4,19 +4,19 @@ import os
 from .Enemies import Enemy
 
 
-# create an empty list for Orge3
+# create an empty list for Tanker
 images = []
 
 
-# add image for the Orge3
+# add image for the Tanker
 for x in range(10):
     string = str(x)
     images.append(pygame.transform.scale(
         pygame.image.load(os.path.join("Assets/ROFENCE/Robot", "tanker_00" + string + ".png")), (50, 50)))
 
 
-# create a class for orge while inherit properties from Enemy File
-class Orge3(Enemy):
+# create a class for tanker while inherit properties from Enemy File
+class Tanker(Enemy):
 
     def __init__(self):
         super().__init__()

@@ -6,9 +6,9 @@ import time
 import random
 
 # Import enemy from other files (Easier for lookup and editing)
-from Enemy.Orge import Orge
-from Enemy.Orge_2 import Orge2
-from Enemy.Orge_3 import Orge3
+from Enemy.Jet import Jet
+from Enemy.Robot import Robot
+from Enemy.Tanker import Tanker
 
 # Import Tower from other files
 from Towers.LongTower import LongTower
@@ -61,8 +61,8 @@ class Game:
         # List of Towers
         self.towers = [ShortTower(280, 320)]
 
-        # list of enemies ----- Orge() as the first enemy
-        self.enemies = [Orge()]
+        # list of enemies ----- Jet() as the first enemy
+        self.enemies = [Jet()]
 
         # Lives and Money
         self.lives = 10
@@ -118,7 +118,7 @@ class Game:
                 self.play_pause.paused = self.pause
                 self.play_pause.img_change()
         else:
-            wave_enemies = [Orge(), Orge2(), Orge3()]
+            wave_enemies = [Jet(), Robot(), Tanker()]
             for x in range(len(self.current_wave)):
                 if self.current_wave[x] != 0:
                     self.enemies.append(wave_enemies[x])
