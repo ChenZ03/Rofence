@@ -138,7 +138,7 @@ class Game:
             # GENERATE SPAWNS
             if not self.pause:
                 # gen monsters
-                if time.time() - self.timer >= random.randrange(1, 6) / 3:
+                if time.time() - self.timer >= random.randrange(1, 6):
                     self.timer = time.time()
                     self.gen_enemies()
 

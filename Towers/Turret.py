@@ -10,6 +10,10 @@ Bullet_images = []
 # Load imgs for Short tower:
 ShortTower_images.append(pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE/Tower/Ice tower", "Ice.png")), (135, 135)))
 
+# Load bullet imgs:
+for i in range(1, 7):
+    Bullet_images.append(pygame.transform.scale(pygame.image.load(os.path.join("Assets/ROFENCE/Tower/Ice tower", "ice_00" + str(i) + ".png")), (55, 55)))
+
 
 # Short Tower Class (inherit from Tower Class)
 class ShortTower(Tower):
@@ -22,7 +26,7 @@ class ShortTower(Tower):
         self.range = 120
         self.inRange = False
         self.hitTimer = time.time()
-        self.damage = 2
+        self.damage = 2.5
         self.moving = False
         self.name = "ShortTower"
         self.left = False
@@ -31,7 +35,7 @@ class ShortTower(Tower):
     def draw(self, window):
         super().draw(window)
 
-        '''if self.inRange:
+        if self.inRange:
             self.bullet_count += 1
             if self.bullet_count >= len(self.bullet_imgs) * 5:
                 self.bullet_count = 0
@@ -39,7 +43,7 @@ class ShortTower(Tower):
             self.bullet_count = 0
 
         bullet = self.bullet_imgs[self.bullet_count // 5]
-        window.blit(bullet, ((self.x + self.width - 15) - (bullet.get_width() / 19), (self.y - bullet.get_height() + 115)))'''
+        window.blit(bullet, ((self.x + self.width - 22) - (bullet.get_width() / 10), (self.y - bullet.get_height() + 10)))
 
         # Draw Range Circle
         surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
