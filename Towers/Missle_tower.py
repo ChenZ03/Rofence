@@ -29,7 +29,7 @@ class LongTower(Tower):
         self.range = 300
         self.inRange = False
         self.hitTimer = time.time()
-        self.damage = 1.5
+        self.damage = 2.5
         self.moving = False
         self.name = "LongTower"
 
@@ -76,7 +76,7 @@ class LongTower(Tower):
         # Attack closest enemy and add money
         if len(closest_enemy) > 0:
             first_enemy = closest_enemy[0]
-            if time.time() - self.hitTimer >= 1.5:
+            if time.time() - self.hitTimer >= 2:
                 self.hitTimer = time.time()
                 if first_enemy.hit(self.damage):
                     money = first_enemy.money

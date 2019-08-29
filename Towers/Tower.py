@@ -3,6 +3,7 @@ import pygame
 from pygame import *
 from Shop.Shop import Menu
 import math
+
 import os
 
 # Shop's background

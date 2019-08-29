@@ -34,19 +34,19 @@ Game_over = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "end
 towers_name = ["LongTower", "ShortTower"]
 
 waves = [
-    [10, 0, 0],
     [20, 0, 0],
-    [50, 0, 0],
-    [0, 10, 0],
+    [40, 0, 0],
+    [70, 0, 0],
     [0, 20, 0],
-    [0, 50, 0],
-    [10, 30, 0],
+    [0, 40, 0],
+    [0, 60, 0],
     [20, 40, 0],
-    [30, 30, 0],
-    [0, 0, 20],
-    [20, 0, 30],
-    [20, 0, 50],
-    [20, 30, 50],
+    [30, 50, 0],
+    [60, 60, 0],
+    [0, 0, 30],
+    [40, 0, 40],
+    [60, 0, 50],
+    [100, 100, 100],
 ]
 
 pygame.mixer.music.load(os.path.join("Assets", "bg.mp3"))
@@ -61,7 +61,7 @@ class Game:
         # Height of the Window
         self.height = 700
         self.width = 1200
-        self.window = pygame.display.set_mode((self.width, self.height))
+        self.window = pygame.display.set_mode((self.width, self.height), FULLSCREEN)
 
         # List of Towers
         self.towers = []
@@ -112,7 +112,10 @@ class Game:
         # Tower path
         self.path = []
 
-    def gen_enemies(self):
+        #quit
+        self.quit = False
+
+    def generate(self):
 
         if sum(self.current_wave) == 0:
             if len(self.enemies) == 0:
@@ -138,7 +141,7 @@ class Game:
         clock = pygame.time.Clock()
 
         while run:
-            clock.tick(40)
+            clock.tick(35)
             # Music
             if self.music:
                 pygame.mixer.music.unpause()
@@ -148,9 +151,9 @@ class Game:
             # GENERATE SPAWNS
             if not self.pause:
                 # gen monsters
-                if time.time() - self.timer >= random.randrange(1, 6):
+                if time.time() - self.timer >= 1.2:
                     self.timer = time.time()
-                    self.gen_enemies()
+                    self.generate()
 
             # Get mouse pos
             pos = pygame.mouse.get_pos()
@@ -165,6 +168,9 @@ class Game:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     run = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        run = False
 
                 # Mouse position
                 pos = pygame.mouse.get_pos()

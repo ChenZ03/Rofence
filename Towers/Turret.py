@@ -26,7 +26,7 @@ class ShortTower(Tower):
         self.range = 120
         self.inRange = False
         self.hitTimer = time.time()
-        self.damage = 2.5
+        self.damage = 2
         self.moving = False
         self.name = "ShortTower"
         self.left = False
